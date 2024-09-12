@@ -28,17 +28,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: | 
-          uname -a
-          python -V
-          wget -qO- bench.sh | bash
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-  build_on_windows:
-    runs-on: windows-latest
-    steps:
-      - name: test
-        run: echo "hello"
+          git add .
+          git commit -m "Add existing file"
+          git push origin main
