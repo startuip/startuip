@@ -19,9 +19,16 @@ jobs:
         Invoke-WebRequest -Uri "https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKtc-hinted.zip" -OutFile "NotoSansCJKtc.zip"
         Expand-Archive -Path "NotoSansCJKtc.zip" -DestinationPath "$env:windir/Fonts"
 
-    - name: Set console output encoding to UTF-8
+    - name: Set PowerShell output encoding to UTF-8
       shell: pwsh
       run: |
         $OutputEncoding = [System.Text.Encoding]::UTF8
         [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-        echo "输出测试：你好，中文世界！"
+        echo "测试中文输出：你好，世界！"
+
+    - name: Write Chinese output to file
+      run: |
+        echo "测试中文输出：你好，世界！" > output.txt
+
+    - name: Display file content
+      run: type output.txt
