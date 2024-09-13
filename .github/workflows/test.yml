@@ -14,11 +14,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install Chinese font
-      run: |
-        Invoke-WebRequest -Uri "https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKtc-hinted.zip" -OutFile "NotoSansCJKtc.zip"
-        Expand-Archive -Path "NotoSansCJKtc.zip" -DestinationPath "$env:windir/Fonts"
-
     - name: Set PowerShell output encoding to UTF-8
       shell: pwsh
       run: |
@@ -26,9 +21,11 @@ jobs:
         [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
         echo "测试中文输出：你好，世界！"
 
-    - name: Write Chinese output to file
+    - name: Create file with Chinese name
       run: |
-        echo "测试中文输出：你好，世界！" > output.txt
+        $fileName = "测试文件.txt"
+        "这是一个中文文件名称的测试内容。" > $fileName
 
-    - name: Display file content
-      run: type output.txt
+    - name: Verify file name
+      run: |
+        dir
